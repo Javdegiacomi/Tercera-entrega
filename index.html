@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparador de Productos</title>
+    <link rel="stylesheet" href="css/styles.css"> <!-- Referencia al archivo CSS -->
+</head>
+<body>
+    <h1>Comparador de Productos</h1>
+
+    <div class="formulario">
+        <h2>Cargar Producto</h2>
+        <input type="text" id="sku" placeholder="SKU"> <!-- Campo para SKU del producto -->
+        <input type="text" id="nombre" placeholder="Nombre del Producto"> <!-- Campo para nombre del producto -->
+        <input type="number" id="precio" placeholder="Precio"> <!-- Campo para precio del producto -->
+        <input type="number" id="cantidad" placeholder="Cantidad"> <!-- Campo para cantidad del producto -->
+        <button onclick="agregarProducto()">Agregar Producto</button> <!-- Botón para agregar producto -->
+    </div>
+
+    <div class="buscador">
+        <h2>Buscar Producto</h2>
+        <input type="text" id="busqueda" placeholder="Buscar por SKU o nombre"> <!-- Campo para búsqueda de producto -->
+        <button onclick="buscarProducto()">Buscar</button> <!-- Botón para buscar producto -->
+    </div>
+
+    <h2>Lista de Productos</h2>
+    <table id="tablaProductos">
+        <tr>
+            <th onclick="ordenarPorPrecio()">Precio (Clic para ordenar)</th> <!-- Ordenar por precio -->
+            <th onclick="ordenarPorNombre()">Nombre (Clic para ordenar)</th> <!-- Ordenar por nombre -->
+            <th>SKU</th> <!-- Columna para SKU -->
+            <th>Cantidad</th> <!-- Columna para cantidad -->
+            <th>Acciones</th> <!-- Columna para acciones -->
+        </tr>
+    </table>
+
+    <div class="venta">
+        <h2>Registrar Venta</h2>
+        <select id="productoSeleccionado"></select> <!-- Selector de producto para venta -->
+        <input type="number" id="cantidadVenta" placeholder="Cantidad a vender"> <!-- Campo para cantidad de venta -->
+        <input type="text" id="nombreComprador" placeholder="Nombre del Comprador"> <!-- Campo para nombre del comprador -->
+        <button onclick="simularVenta()">Vender Producto</button> <!-- Botón para registrar venta -->
+    </div>
+
+    <h2>Registro de Ventas</h2>
+    <table id="tablaVentas">
+        <tr>
+            <th>Fecha</th> <!-- Columna para fecha de la venta -->
+            <th>Comprador</th> <!-- Columna para nombre del comprador -->
+            <th>Producto</th> <!-- Columna para nombre del producto -->
+            <th>Cantidad</th> <!-- Columna para cantidad vendida -->
+        </tr>
+    </table>
+
+<!--Archivo HTML y archivo JS referenciado en el HTML-->
+    <script src="js/main.js"></script> <!-- Referencia al archivo JS -->
+</body>
+</html>

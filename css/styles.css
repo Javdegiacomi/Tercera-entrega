@@ -1,0 +1,33 @@
+body {
+    font-family: Arial, sans-serif; /* Establece la fuente */
+    margin: 20px; /* Margen alrededor del cuerpo */
+}
+
+h1 {
+    color: #333; /* Color del título principal */
+}
+
+.formulario, .buscador, .venta {
+    margin-bottom: 20px; /* Margen inferior para los formularios */
+}
+
+input, select {
+    margin-right: 10px; /* Margen derecho para los campos de entrada */
+}
+
+table {
+    width: 100%; /* Ancho completo de la tabla */
+    border-collapse: collapse; /* Bordes colapsados para la tabla */
+    margin-top: 20px; /* Espacio superior entre tablas */
+}
+
+th, td {
+    border: 1px solid #ddd; /* Bordes de las celdas */
+    padding: 8px; /* Relleno de las celdas */
+    text-align: left; /* Alineación del texto a la izquierda */
+    cursor: pointer; /* Cursor de puntero en los encabezados */
+}
+
+th {
+    background-color: #f2f2f2; /* Color de fondo de los encabezados */
+}
