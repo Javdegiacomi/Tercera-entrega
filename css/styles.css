@@ -1,33 +1,147 @@
 body {
-    font-family: Arial, sans-serif; /* Establece la fuente */
-    margin: 20px; /* Margen alrededor del cuerpo */
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
 }
 
 h1 {
-    color: #333; /* Color del título principal */
+    text-align: center;
+    margin: 20px 0;
 }
 
-.formulario, .buscador, .venta {
-    margin-bottom: 20px; /* Margen inferior para los formularios */
+.login-container {
+    width: 400px; /* Aumentar el ancho de la ventana de login */
+    margin: auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-input, select {
-    margin-right: 10px; /* Margen derecho para los campos de entrada */
+.input-container {
+    margin-bottom: 15px;
 }
 
+input[type="text"], input[type="password"], input[type="number"], select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.login-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    border: none;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.login-button:hover {
+    background-color: #218838;
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px; /* Aumentar el ancho del menú de navegación */
+    background-color: #343a40;
+    color: white;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    padding: 10px;
+    display: none; /* ocultar inicialmente */
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    padding: 10px 0;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.logo-container {
+    position: relative;
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+
+.menu-desplegable {
+    display: none; /* ocultar el menú por defecto */
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    z-index: 1000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.menu-desplegable ul {
+    list-style-type: none;
+    padding: 10px;
+    margin: 0;
+}
+
+.menu-desplegable ul li {
+    padding: 5px 0;
+}
+
+.menu-desplegable ul li a {
+    color: #333;
+}
+
+.menu-desplegable.show {
+    display: block; /* mostrar el menú cuando se activa */
+}
+
+/* Estilos para la tabla */
 table {
-    width: 100%; /* Ancho completo de la tabla */
-    border-collapse: collapse; /* Bordes colapsados para la tabla */
-    margin-top: 20px; /* Espacio superior entre tablas */
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
 }
 
 th, td {
-    border: 1px solid #ddd; /* Bordes de las celdas */
-    padding: 8px; /* Relleno de las celdas */
-    text-align: left; /* Alineación del texto a la izquierda */
-    cursor: pointer; /* Cursor de puntero en los encabezados */
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
 }
 
 th {
-    background-color: #f2f2f2; /* Color de fondo de los encabezados */
+    background-color: #343a40;
+    color: white;
+}
+
+/* Agregar efectos al pasar el puntero sobre los enlaces del menú */
+nav ul li a:hover {
+    background-color: #495057;
+}
+
+/* Menú lateral */
+nav li:hover {
+    background-color: #495057;
+}
+
+/* Se eliminaron los estilos de hover para el menú desplegable */
+section {
+    width: calc(100% - 250px); /* Asegurar que las secciones ocupen el espacio restante */
+    margin-left: 250px; /* Dejar espacio para el menú de navegación */
 }

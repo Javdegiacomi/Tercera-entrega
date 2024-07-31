@@ -3,57 +3,191 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comparador de Productos</title>
-    <link rel="stylesheet" href="css/styles.css"> <!-- Referencia al archivo CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+    <title>Gestión de Ventas e Inventarios</title>
 </head>
 <body>
-    <h1>Comparador de Productos</h1>
+    <div class="login-container">
+        <h1>Gestión de Ventas e Inventarios</h1>
+        <section id="bienvenida">
+            <h2>Bienvenido a la Aplicación</h2>
+            <p>Todas tus cuentas y trámites en un mismo sitio.</p>
+        </section>
 
-    <div class="formulario">
-        <h2>Cargar Producto</h2>
-        <input type="text" id="sku" placeholder="SKU"> <!-- Campo para SKU del producto -->
-        <input type="text" id="nombre" placeholder="Nombre del Producto"> <!-- Campo para nombre del producto -->
-        <input type="number" id="precio" placeholder="Precio"> <!-- Campo para precio del producto -->
-        <input type="number" id="cantidad" placeholder="Cantidad"> <!-- Campo para cantidad del producto -->
-        <button onclick="agregarProducto()">Agregar Producto</button> <!-- Botón para agregar producto -->
+        <section id="loginRegistro" class="active">
+            <h2 id="tituloRegistro">Registro</h2>
+            <form id="formRegistro" onsubmit="event.preventDefault(); registrarUsuario();">
+                <div class="input-container">
+                    <input type="text" id="regNombre" placeholder="Nombre de usuario" required>
+                </div>
+                <div class="input-container">
+                    <input type="password" id="regPassword" placeholder="Contraseña" required>
+                </div>
+                <div class="input-container">
+                    <input type="checkbox" id="mostrarContrasenaReg">
+                    <label for="mostrarContrasenaReg">Mostrar contraseña</label>
+                </div>
+                <button type="submit" class="login-button">Registrarse</button>
+            </form>
+            <p>¿Ya tienes una cuenta? <a href="#" onclick="mostrarLogin()">Iniciar sesión</a></p>
+        </section>
+
+        <section id="login" style="display: none;">
+            <h2>Iniciar Sesión</h2>
+            <p>Para comenzar a realizar tus gestiones, es necesario que inicies sesión en tu cuenta.</p>
+            <button onclick="iniciarConFacebook()">Iniciar con Facebook</button>
+            <button onclick="iniciarConCorreo()">Iniciar con Correo Registrado</button>
+            <form id="formLogin" onsubmit="event.preventDefault(); iniciarSesion();">
+                <div class="input-container">
+                    <input type="text" id="loginNombre" placeholder="Nombre de usuario" required>
+                </div>
+                <div class="input-container">
+                    <input type="password" id="loginPassword" placeholder="Contraseña" required>
+                </div>
+                <div class="input-container">
+                    <input type="checkbox" id="mostrarContrasenaLogin">
+                    <label for="mostrarContrasenaLogin">Mostrar contraseña</label>
+                </div>
+                <div class="remember-container">
+                    <input type="checkbox" id="recordarContrasena">
+                    <label for="recordarContrasena">Recordar contraseña</label>
+                </div>
+                <button type="submit" class="login-button">Iniciar Sesión</button>
+            </form>
+            <p><a href="#" onclick="recuperarContrasena()">¿Olvidaste tu contraseña?</a></p>
+            <p><a href="#" onclick="mostrarRegistro()">¿Por dónde estoy registrado?</a></p>
+        </section>
+
+        <nav id="nav" style="display: none;">
+            <div class="logo-container">
+                <img src="path/to/logo.png" alt="Logo" class="logo" id="logo">
+                <div id="menuDesplegable" class="menu-desplegable">
+                    <ul>
+                        <li><a href="#" onclick="actualizarDatos()">Actualizar Datos</a></li>
+                        <li><a href="#" onclick="cerrarSesion()">Cerrar Sesión</a></li>
+                        <li><a href="#" onclick="cambiarContrasena()">Cambiar Contraseña</a></li>
+                    </ul>
+                </div>
+            </div>
+            <ul>
+                <li><span id="usuarioNombre"></span></li>
+                <li><a href="#stock">Control de Stock</a></li>
+                <li><a href="#compras">Compras</a></li>
+                <li><a href="#ventas">Ventas</a></li>
+                <li><a href="#administracion">Administración</a></li>
+            </ul>
+        </nav>
+
+        <section id="stock" style="display: none;">
+            <h2>Control de Stock</h2>
+            <form id="formAgregarProducto" onsubmit="event.preventDefault(); agregarProducto(sku.value, nombre.value, precio.value, cantidad.value);">
+                <input type="text" id="sku" placeholder="SKU" required>
+                <input type="text" id="nombre" placeholder="Nombre" required>
+                <input type="number" id="precio" placeholder="Precio" required>
+                <input type="number" id="cantidad" placeholder="Cantidad" required>
+                <button type="submit">Agregar Producto</button>
+            </form>
+            <table id="tabla-productos">
+                <thead>
+                    <tr>
+                        <th onclick="ordenarProductos('sku')">SKU</th>
+                        <th onclick="ordenarProductos('nombre')">Descripción</th>
+                        <th onclick="ordenarProductos('precio')">Precio</th>
+                        <th onclick="ordenarProductos('cantidad')">Cantidad</th>
+                        <th>Total Precio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Las filas se llenarán aquí desde stock.js -->
+                </tbody>
+            </table>
+        </section>
+
+        <section id="compras" style="display: none;">
+            <h2>Compras</h2>
+            <button onclick="abrirVentanaOrdenCompra()">Generar Orden de Compra</button>
+            <button onclick="abrirVentanaCargarRemito()">Cargar Remito</button>
+            <div id="ventanaOrdenCompra" style="display:none;">
+                <h3>Orden de Compra</h3>
+                <form onsubmit="event.preventDefault(); generarOrdenCompra();">
+                    <select id="proveedor" required>
+                        <option value="">Seleccionar Proveedor</option>
+                        <!-- Proveedores se cargarán dinámicamente -->
+                    </select>
+                    <table id="tabla-compras">
+                        <thead>
+                            <tr>
+                                <th>SKU</th>
+                                <th>Descripción</th>
+                                <th>Precio</th>
+                                <th>Cantidad</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Las filas se llenarán aquí desde compras.js -->
+                        </tbody>
+                    </table>
+                    <button type="submit">Generar Orden de Compra</button>
+                    <button type="button" onclick="cerrarVentanaOrdenCompra()">Cerrar</button>
+                </form>
+            </div>
+
+            <div id="ventanaCargarRemito" style="display:none;">
+                <h3>Cargar Remito</h3>
+                <form onsubmit="event.preventDefault(); cargarRemito();">
+                    <input type="text" id="numeroRemito" placeholder="Número de Remito" required>
+                    <button type="submit">Cargar Remito</button>
+                    <button type="button" onclick="cerrarVentanaCargarRemito()">Cerrar</button>
+                </form>
+            </div>
+        </section>
+
+        <section id="ventas" style="display: none;">
+            <h2>Ventas</h2>
+            <form id="formRegistrarVenta" onsubmit="event.preventDefault(); registrarVenta();">
+                <input type="text" id="ventaProducto" placeholder="Producto" required>
+                <input type="number" id="ventaCantidad" placeholder="Cantidad" required>
+                <input type="text" id="ventaNombreCliente" placeholder="Nombre del cliente" required>
+                <input type="email" id="ventaEmailCliente" placeholder="Email del cliente" required>
+                <button type="submit">Registrar Venta</button>
+            </form>
+            <canvas id="graficoVentas" width="400" height="200"></canvas>
+        </section>
+
+        <section id="administracion" style="display: none;">
+            <h2>Administración</h2>
+            <button onclick="mostrarAgregarProveedor()">Agregar Proveedor</button>
+            <div id="ventanaAgregarProveedor" style="display:none;">
+                <h3>Agregar Proveedor</h3>
+                <form onsubmit="event.preventDefault(); agregarProveedor();">
+                    <input type="text" id="nombreProveedor" placeholder="Nombre del Proveedor" required>
+                    <input type="text" id="skuProveedor" placeholder="SKU del Proveedor" required>
+                    <button type="submit">Agregar Proveedor</button>
+                    <button type="button" onclick="cerrarVentanaAgregarProveedor()">Cerrar</button>
+                </form>
+            </div>
+        </section>
     </div>
 
-    <div class="buscador">
-        <h2>Buscar Producto</h2>
-        <input type="text" id="busqueda" placeholder="Buscar por SKU o nombre"> <!-- Campo para búsqueda de producto -->
-        <button onclick="buscarProducto()">Buscar</button> <!-- Botón para buscar producto -->
-    </div>
+    <script src="js/main.js"></script>
+    <script src="js/stock.js"></script>
+    <script src="js/compras.js"></script>
+    <script src="js/ventas.js"></script>
+    <script src="js/admin.js"></script>
+    
+    <script>
+        const logo = document.getElementById('logo');
+        const menuDesplegable = document.getElementById('menuDesplegable');
 
-    <h2>Lista de Productos</h2>
-    <table id="tablaProductos">
-        <tr>
-            <th onclick="ordenarPorPrecio()">Precio (Clic para ordenar)</th> <!-- Ordenar por precio -->
-            <th onclick="ordenarPorNombre()">Nombre (Clic para ordenar)</th> <!-- Ordenar por nombre -->
-            <th>SKU</th> <!-- Columna para SKU -->
-            <th>Cantidad</th> <!-- Columna para cantidad -->
-            <th>Acciones</th> <!-- Columna para acciones -->
-        </tr>
-    </table>
+        logo.onclick = function() {
+            menuDesplegable.style.display = menuDesplegable.style.display === 'block' ? 'none' : 'block';
+        };
 
-    <div class="venta">
-        <h2>Registrar Venta</h2>
-        <select id="productoSeleccionado"></select> <!-- Selector de producto para venta -->
-        <input type="number" id="cantidadVenta" placeholder="Cantidad a vender"> <!-- Campo para cantidad de venta -->
-        <input type="text" id="nombreComprador" placeholder="Nombre del Comprador"> <!-- Campo para nombre del comprador -->
-        <button onclick="simularVenta()">Vender Producto</button> <!-- Botón para registrar venta -->
-    </div>
-
-    <h2>Registro de Ventas</h2>
-    <table id="tablaVentas">
-        <tr>
-            <th>Fecha</th> <!-- Columna para fecha de la venta -->
-            <th>Comprador</th> <!-- Columna para nombre del comprador -->
-            <th>Producto</th> <!-- Columna para nombre del producto -->
-            <th>Cantidad</th> <!-- Columna para cantidad vendida -->
-        </tr>
-    </table>
-
-<!--Archivo HTML y archivo JS referenciado en el HTML-->
-    <script src="js/main.js"></script> <!-- Referencia al archivo JS -->
+        window.onclick = function(event) {
+            if (!logo.contains(event.target) && !menuDesplegable.contains(event.target)) {
+                menuDesplegable.style.display = 'none';
+            }
+        };
+    </script>
 </body>
 </html>
